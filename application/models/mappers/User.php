@@ -85,7 +85,7 @@ class Application_Model_Mapper_User implements Application_Model_Mapper_Abstract
 	public function findAll() {
 		// TODO Auto-generated method stub
 	    $userArray = array();
-	    $result = $this->userDbTable->fetchAll()->toArray();
+	    $result = $this->userDbTable->fetchAll($this->userDbTable->select()->where("status=?",true))->toArray();
 	    foreach($result as $row){           
 	        $mapperTypeUser = new Application_Model_Mapper_TypeUser();
 	        $typeUser =$mapperTypeUser->findOneBy($row["type_user_id"]);

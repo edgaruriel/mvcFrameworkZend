@@ -10,7 +10,7 @@ $employee = $this->user;
 ?>
 <div class="container center">
     <div class="header">Editar: <?php echo $employee->getName();?></div>
-            <form action="../User/updateUser" id="form" name="form" method="post" class="form-group">
+            <form action="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'update'),null,true);?>" id="form" name="form" method="post" class="form-group">
                 <input type="hidden" id="id" name="id" value="<?php echo $employee->getId();?>">
                 <?php //if(isset($errorEmail)):?>
                   <!--   <label style="text-align: center; color: red;">Ya existe un usuario con el correo: <?php //echo $_GET["email"];?></label> -->
@@ -33,7 +33,7 @@ $employee = $this->user;
 					<select id="typeUserId" name="typeUserId">
                     <option value="">Seleccione un tipo</option>
                     <?php 
-                    foreach ($types as $type):?>
+                    foreach ($this->typeUsers as $type):?>
                     <?php if($type->getId() == $employee->getTypeUser()->getId()):?>
                     <option value="<?php echo $type->getId();?>" selected="selected"><?php echo $type->getName();?></option>
                     <?php 
@@ -44,7 +44,7 @@ $employee = $this->user;
                     </select>
                     <br>
                 <input type="submit" name="editBtn" id="editBtn" value="Actualizar" class="right verde">
-                <a id="btn_cancelar" value="Cancelar" href="../User/listUser" class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
+                <a id="btn_cancelar" value="Cancelar" href="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'index'),null,true);?>" class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
                 <br>
                 <br>
                 <br>

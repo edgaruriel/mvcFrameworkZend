@@ -1,13 +1,10 @@
 <?php 
 $this->headScript()->appendFile($this->baseUrl().'/library/bootstrap-multiselect/js/bootstrap-multiselect.js');
 $this->headScript()->appendFile($this->baseUrl().'/library/bootstrap-multiselect/js/prettify.js');
+$this->headScript()->appendFile($this->baseUrl().'/js/admin/movie/edit.js');
 
 $this->headLink()->appendStylesheet($this->baseUrl().'/library/bootstrap-multiselect/css/bootstrap-multiselect.css');
 $this->headLink()->appendStylesheet($this->baseUrl().'/library/bootstrap-multiselect/css/prettify.css');
-
-$this->headLink()->appendStylesheet($this->baseUrl().'/css/default/required.css');
-
-$this->headScript()->appendFile($this->baseUrl().'/js/admin/movie/edit.js');
 
 $movie = $this->movie;
 ?>
@@ -15,7 +12,7 @@ $movie = $this->movie;
    <div class="container center">
    <div class="header">Editar Pelicula</div>
 
-            <form action="../Movie/updateMovie" id="form" name="form" method="post" enctype="multipart/form-data" class="form-group">
+            <form action="<?php echo $this->url(array('module'=>'admin','controller' => 'movie', 'action' => 'update'),null,true);?>" id="form" name="form" method="post" enctype="multipart/form-data" class="form-group">
                     <label ><span>Titulo: </span></label><input type="text" id="title" name="title" value="<?php echo $movie->getTitle();?>"/>
                     
                     <label ><span>Formato: </span></label><input type="text" id="format" name="format" value="<?php echo $movie->getFormat();?>"/>
@@ -55,10 +52,8 @@ $movie = $this->movie;
                     <br>
                     <br>
                     <input type="hidden" id="id" name="id" value="<?php echo $movie->getId();?>">
-                <input type="hidden" id="status" name="status" value="1">
-                <input type="hidden" id="rentedUnits" name="rentedUnits" value="0">
-                <input type="submit" name="newBtn" id="newBtn" value="Agregar" class="right verde">
-                <a id="btn_cancelar" value="Cancelar" href="../Movie/listMovies" class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
+                <input type="submit" name="editBtn" id="editBtn" value="Editar" class="right verde">
+                <a id="btn_cancelar" value="Cancelar" href="<?php echo $this->url(array('module'=>'admin','controller' => 'movie', 'action' => 'index'),null,true);?>" class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
                 <br>
                 <br>
                 <br>

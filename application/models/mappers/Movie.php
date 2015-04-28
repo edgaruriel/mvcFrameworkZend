@@ -24,7 +24,6 @@ class Application_Model_Mapper_Movie implements Application_Model_Mapper_Abstrac
 				"year"=>$obj->getYear(),
 				"price"=>$obj->getPrice(),
 		        "code"=>$obj->getCode(),
-		        "photo"=>$obj->getPhoto(),
 		        "gender_id"=>$obj->getGender()->getId(),
 		        "status"=>true,
 		        "rented_units"=>$obj->getRentedUnits()
@@ -45,7 +44,6 @@ class Application_Model_Mapper_Movie implements Application_Model_Mapper_Abstrac
 				"year"=>$obj->getYear(),
 				"price"=>$obj->getPrice(),
 		        "code"=>$obj->getCode(),
-		        "photo"=>$obj->getPhoto(),
 		        "gender_id"=>$obj->getGender()->getId(),
 		        "rented_units"=>$obj->getRentedUnits()
 		);
@@ -86,7 +84,7 @@ class Application_Model_Mapper_Movie implements Application_Model_Mapper_Abstrac
 	public function findAll() {
 		// TODO Auto-generated method stub
 		$movieArray = array();
-		$result = $this->movieDbTable->fetchAll()->toArray();
+		$result = $this->movieDbTable->fetchAll($this->movieDbTable->select()->where("status=?",true))->toArray();
 		$genderMapper = new Application_Model_Mapper_Gender();
 		 
 		foreach($result as $row){

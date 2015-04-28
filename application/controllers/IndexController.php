@@ -16,6 +16,7 @@ class IndexController extends Zend_Controller_Action
     
     public function deniedAction()
     {
+        $this->_helper->layout()->disableLayout();
     	// action body
     }
 }

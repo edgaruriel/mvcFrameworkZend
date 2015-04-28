@@ -36,7 +36,7 @@ $this->headLink()->appendStylesheet($this->baseUrl().'/library/Datatables-Bootst
                             <td><?php echo utf8_encode($movie->getGender()->getName());?></td>
                             <td>
                                 <a href="<?php echo $this->url(array('module'=>'admin','controller' => 'movie', 'action' => 'edit', 'id'=>$movie->getId()),null,true);?>" class="s-button verde"><span class="s-icon fa-edit"></span></a>
-                                <a href="deleteMovie?id=<?php echo $movie->id;?>" class="s-button rojo"><span class="s-icon fa-trash"></span></a>
+                                <a href="<?php echo $this->url(array('module'=>'admin','controller' => 'movie', 'action' => 'delete', 'id'=>$movie->getId()),null,true);?>" class="s-button rojo"><span class="s-icon fa-trash"></span></a>
                             </td>
                         </tr>
                     <?php endforeach;?>

@@ -32,8 +32,8 @@ $this->headLink()->appendStylesheet($this->baseUrl().'/library/Datatables-Bootst
                             <td><?php echo $client->getEmail();?></td>
                             <td><?php echo $client->getIfe();?></td>
                             <td>
-                                <a href="<?php echo $this->url(array('module'=>'operator','controller' => 'client', 'action' => 'edit', 'id'=>$client->getId()),null,true);?>"class="s-button verde"><span class="s-icon fa-edit"></span></a>
-                                <a href="../Client/deleteClient?id=<?php echo $client->id;?>"class="s-button rojo"><span class="s-icon fa-trash"></span></a>
+                                <a href="<?php echo $this->url(array('module'=>'operator','controller' => 'client', 'action' => 'edit', 'id'=>$client->getId()),null,true);?>" class="s-button verde"><span class="s-icon fa-edit"></span></a>
+                                <a href="<?php echo $this->url(array('module'=>'operator','controller' => 'client', 'action' => 'delete', 'id'=>$client->getId()),null,true);?>" class="s-button rojo"><span class="s-icon fa-trash"></span></a>
                             </td>
                         </tr>
                     <?php endforeach;?>

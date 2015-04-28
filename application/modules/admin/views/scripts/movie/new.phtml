@@ -12,7 +12,7 @@ $this->headScript()->appendFile($this->baseUrl().'/js/admin/movie/new.js');
    <div class="container center">
    <div class="header">Nueva Pelicula</div>
 
-            <form action="../Movie/updateMovie" id="form" name="form" method="post" enctype="multipart/form-data" class="form-group">
+            <form action="<?php echo $this->url(array('module'=>'admin','controller' => 'movie', 'action' => 'new'),null,true);?>" id="form" name="form" method="post" enctype="multipart/form-data" class="form-group">
                     <label ><span>Titulo: </span></label><input type="text" id="title" name="title" value="<?php echo (isset($_POST["title"]))? $_POST["title"]: ""?>"/>
                     
                     <label ><span>Formato: </span></label><input type="text" id="format" name="format" value="<?php echo (isset($_POST["format"]))? $_POST["format"]: ""?>"/>
@@ -54,7 +54,7 @@ $this->headScript()->appendFile($this->baseUrl().'/js/admin/movie/new.js');
                 <input type="hidden" id="status" name="status" value="1">
                 <input type="hidden" id="rentedUnits" name="rentedUnits" value="0">
                 <input type="submit" name="newBtn" id="newBtn" value="Agregar" class="right verde">
-                <a id="btn_cancelar" value="Cancelar" href="../Movie/listMovies" class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
+                <a id="btn_cancelar" value="Cancelar" href="<?php echo $this->url(array('module'=>'admin','controller' => 'movie', 'action' => 'index'),null,true);?>" class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
                 <br>
                 <br>
                 <br>

@@ -35,7 +35,6 @@ class Operator_ClientController extends Zend_Controller_Action
 	
 			$client = new Application_Model_Client();
 			$client->createFromArray($data);
-			
 	
 			$clientService = new Application_Service_Client();
 			$clientService->addClient($client);
@@ -57,7 +56,6 @@ class Operator_ClientController extends Zend_Controller_Action
 			
 			$client = new Application_Model_Client();
 			$client->createFromArray($data);
-			$client->setId($data["id_client"]);
 	
 			$clientService = new Application_Service_Client();
 			$clientService->update($client);
