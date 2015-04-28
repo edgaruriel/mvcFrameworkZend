@@ -1,0 +1,53 @@
+<?php 
+$this->headScript()->appendFile($this->baseUrl().'/library/DataTables1.9/media/js/jquery.dataTables.js');
+$this->headScript()->appendFile($this->baseUrl().'/library/Datatables-Bootstrap3/BS3/assets/js/datatables.js');
+$this->headLink()->appendStylesheet($this->baseUrl().'/library/Datatables-Bootstrap3/BS3/assets/css/datatables.css');
+    $this->headScript()->appendFile($this->baseUrl().'/js/user/index.js');
+    //echo $this->headScript();
+?>
+<div class="container center" >
+		<div class="header">Empleados</div>
+        <div>
+            <div class="actions">
+	            <a href="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'new'),null,true);?>" class="button right verde"><span class="icon fa-plus"></span>Agregar Empleado</a>
+	            <a href="../Index/indexAdmin" class="button left azul"><span class="icon fa-home"></span>Regresar</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Usuario</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Tipo</th>
+                        <th>OPERACIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($this->users as $employee):?>
+                        <tr>
+                            <td><?php echo $employee->getId();?></td>
+                            <td><?php echo utf8_encode($employee->getUsername());?></td>
+                            <td><?php echo utf8_encode($employee->getName());?></td>
+                            <td><?php echo utf8_encode($employee->getLastName());?></td>
+                            <td><?php echo utf8_encode($employee->getEmail())?></td>
+                            <td>
+                            <?php 
+                         /*   foreach ($types as $type):
+                            	if($type->getId() == $employee->getTypeUser())
+                            		echo utf8_encode($type->getName());
+                            endforeach; */
+                            echo utf8_encode($employee->getTypeUser()->getName()); 
+                            ?>
+                            </td>
+                            <td>
+                                <a href="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'edit', 'id'=>$employee->getId()),null,true);?> " class="s-button verde"><span class="s-icon fa-edit"></span></a>
+                                <a href="../User/deleteUser?id=<?php echo $employee->id;?>" class="s-button rojo"><span class="s-icon fa-trash"></span></a>
+                            </td>
+                        </tr>
+                    <?php endforeach;?>
+                </tbody>
+            </table>
+    </div>
+</div>

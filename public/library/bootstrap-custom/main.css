@@ -1,0 +1,118 @@
+body{
+	/**background:#ececec;*/
+}
+
+.task-list{
+	list-style-type: none;
+	padding-left: 0;
+}
+.task-list p {
+	position: relative;
+}
+.task-list p .label {
+	position: absolute;
+	right: 0;
+}
+.progress.progress-xs {
+	height: 8px;
+}
+
+.fc-widget-header,.fc-widget-content{border:1px solid #ddd}
+.fc-widget-header .fc-agenda-divider-inner{background:#eee}
+.fc-agenda-slots tr.fc-minor th.ui-widget-header{*border-top-style:solid}
+
+.row-widget{margin-bottom:0}
+.widget{border-width:1px;border-style:solid;margin-bottom:20px;background-color:#f9f9f9;border-color:#d3d3d3;position: relative;}
+.widget.widget-table{overflow:hidden}
+.widget.widget-hide-header{border:none;background:none}
+.widget.widget-focus-enabled{z-index:999;position:relative}
+.widget .widget-header{padding:0 10px;height:35px;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#d3d3d3;background-color:#eee}
+@media screen and (max-width: 480px){
+	.widget .widget-header{height:100%}}
+	.widget .widget-header h3{display:-moz-inline-stack;display:inline-block;vertical-align:middle;*vertical-align:auto;zoom:1;*display:inline;font-family:"latobold";font-size:1.1em;margin:0;line-height:35px;float:left}
+@media screen and (max-width: 480px){
+	.widget .widget-header h3{float:none}}
+	.widget .widget-header .fa{margin-right:5px}
+	.widget .widget-header em{float:left;font-size:0.9em;color:#a4a4a4;line-height:35px;margin-left:4px}
+@media screen and (max-width: 1279px){
+	.widget .widget-header em{display:none}}
+	.widget .widget-header .btn-help{float:left;padding:0;position:relative;top:3px;left:3px}
+@media screen and (max-width: 1279px){
+	.widget .widget-header .btn-help{display:none}}
+	.widget .widget-header .btn-group>a{color:#555}
+	.widget .widget-header .widget-header-toolbar{float:right;width:auto;height:35px;border-left:1px solid #ddd;padding-left:10px;margin-left:10px}
+@media screen and (max-width: 480px){
+	.widget .widget-header .widget-header-toolbar{display:block;float:none;border-left:none;margin-left:0;padding-left:0}}
+	.widget .widget-header .widget-header-toolbar>a{margin-left:5px}
+	.widget .widget-header .widget-header-toolbar.btn-init-hide{display:none}
+	.widget .widget-header .widget-header-toolbar .control-title{font-size:0.9em;color:#a4a4a4;position:relative;top:1px}
+	.widget .widget-header .widget-header-toolbar .label{position:relative;top:8px}
+	.widget .widget-header .widget-header-toolbar .toolbar-item-group{padding-top:7px}
+	.widget .widget-header .widget-header-toolbar .toolbar-item-group .label{position:relative;top:1px}
+	.widget .widget-header .widget-header-toolbar .toolbar-item-group .multiselect{margin-top:0}
+	.widget .widget-header .widget-header-toolbar .btn,.widget .widget-header .widget-header-toolbar .btn-borderless{display:-moz-inline-stack;display:inline-block;vertical-align:middle;*vertical-align:auto;zoom:1;*display:inline;height:25px}
+	.widget .widget-header .widget-header-toolbar .btn-borderless{padding-top:5px}
+	.widget .widget-header .widget-header-toolbar .btn-borderless .fa{margin-right:5px;position:relative;top:2px}
+	.widget .widget-header .widget-header-toolbar .btn{margin-top:5px}
+	.widget .widget-header .widget-header-toolbar .btn.btn-sm{padding:0 10px}
+	.widget .widget-header .widget-header-toolbar .btn.btn-sm .fa{width:10px;height:12px}
+	.widget .widget-header .widget-header-toolbar .progress{width:150px;height:15px;margin-bottom:0;margin-top:10px}
+	.widget .widget-header .widget-header-toolbar .progress .progress-bar{font-size:10px;line-height:1.5}
+	.widget .widget-content{padding:20px 10px}
+	.widget .widget-footer{padding:7px 10px;border-top-width:1px;border-top-style:solid;border-top-color:#f0f0f0;background-color:#f7f7f7}
+	.widget.real-time-chart .widget-content{padding-right:40px}
+	.widget.real-time-chart #demo-real-time-chart{font-size:12px;padding-right:40px}
+@media screen and (max-width: 768px){
+	.widget.real-time-chart #demo-real-time-chart .flot-x-axis .flot-tick-label{display:none}}
+	.widget-sparkline .sparkline-stat-item{padding:8px 0;margin-bottom:30px}
+	.widget-sparkline .sparkline-stat-item strong{display:block;font-size:1.5em;font-weight:300}
+@media screen and (max-width: 992px){
+	.widget-chart-toggle-series #choices{margin-top:30px}
+	.widget-chart-toggle-series #choices>div{display:-moz-inline-stack;display:inline-block;vertical-align:middle;*vertical-align:auto;zoom:1;*display:inline}}
+	.widget-header-toolbar .onoffswitch{position:relative;top:2px}
+	.widget-header-toolbar .dropdown-menu{font-size:12px}
+@media screen and (max-width: 480px){
+	.widget-header-toolbar .dropdown-menu{right:auto;left:0}}
+	.widget-header-toolbar ul.multiselect-container>li>a{line-height:1.5}
+	.widget-header-toolbar ul.multiselect-container>li>a label.radio:before{width:13px;height:13px;margin-right:5px}
+	.widget-header-toolbar ul.multiselect-container>li.active>a label.radio:before{font-size:30px;line-height:12px}
+	.widget-header ul.nav{margin-right:-11px}
+	.widget-header ul.nav>li>a{padding:6px 15px;border-top:transparent;line-height:1.5;margin-right:0;height:35px}
+	.widget-header ul.nav>li>a:hover{border-top:initial}
+@media screen and (max-width: 480px){
+	.widget-header ul.nav{float:none !important;margin:0 -11px}
+	.widget-header ul.nav>li>a{border-top:1px solid #ddd}
+	.widget-header ul.nav>li>a:hover{border-top:1px solid #ddd}}
+	.widget-reminder .widget-content{position:relative;overflow:hidden;padding:20px;background-color:#6393A7;color:#fff}
+	.ui-widget-overlay{background-color:#000}
+	.ui-widget-header{background-color:#ddd;min-height:37px;font-weight:700;font-size:1.3em;padding:5px}
+
+/**CSS widget overlay**/
+.widget-box-overlay{
+	position:absolute;
+	top:-1px;
+	bottom:-1px;
+	right:-1px;
+	left:-1px;
+	z-index:999;
+	text-align:center;
+	min-height:100%;
+	background-color:rgba(0,0,0,0.3)
+}
+.widget-box-overlay>.loading-icon{
+	position:relative;
+	top:20%;
+	left:0;
+	right:0;
+	text-align:center
+}
+.widget-box.collapsed .widget-box-overlay>.loading-icon{
+	top:10%
+}
+.widget-box-overlay>.loading-icon.icon-spin{
+	-moz-animation-duration:1.2s;
+	-webkit-animation-duration:1.2s;
+	-o-animation-duration:1.2s;
+	-ms-animation-duration:1.2s;
+	animation-duration:1.2s
+}

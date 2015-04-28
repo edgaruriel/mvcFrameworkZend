@@ -1,0 +1,67 @@
+<?php
+?>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <?php
+$this->headScript()->appendFile($this->baseUrl() . '/library/jquery/jquery-1.8.2.min.js');
+$this->headScript()->appendFile($this->baseUrl() . '/library/bootstrap.3.1.1/js/bootstrap.js');
+$this->headScript()->appendFile($this->baseUrl() . '/library/jqueryValidation/jquery-validation.js');
+
+$this->headLink()->appendStylesheet($this->baseUrl() . '/css/Login/login.css');
+
+echo $this->headLink();
+echo $this->headScript();
+?>
+  
+  <title>Videoclub</title>
+<style type="text/css">
+.panel-heading {
+	padding: 5px 15px;
+}
+
+.panel-footer {
+	padding: 1px 15px;
+	color: #A0A0A0;
+}
+
+.profile-img {
+	width: 96px;
+	height: 96px;
+	margin: 0 auto 10px;
+	display: block;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
+</style>
+</head>
+<body>
+	<div class="title">Videoclub Estrella</div>
+	<div class="login">
+		<form id="formLogin" action="<?php echo $this->url(array('controller' => 'login', 'action' => 'index'),null,true);?>" method="post"
+			class="form-group">
+			<div>
+				<div class="header">Inicio de Sesi&oacute;n</div>
+				<label><span>Usuario:</span></label> <input type="text" id="user"
+					name="user" /> <br> <br> <label><span>Contrase&ntilde;a:</span></label>
+				<input type="password" id="password" name="password" /> <br> <br>
+				<button type="submit" id="logIn" name="logIn">Ingresar</button>
+			</div>
+                
+		</form>
+		<?php if(isset($this->error)):?>
+				    <div class="alert alert-danger">
+				    <?php echo utf8_encode($this->error);?>
+				    </div>
+				<?php endif;?>
+	</div>
+	<div class="autores">
+		<h3>Desarrollado por</h3>
+		<h3>Edgar Rodriguez - Eddie Paredes - Jaime Negrete</h3>
+	</div>
+</body>
+

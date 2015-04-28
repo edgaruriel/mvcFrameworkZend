@@ -1,0 +1,81 @@
+<?php 
+$this->headScript()->appendFile($this->baseUrl().'/library/DataTables1.9/media/js/jquery.dataTables.js');
+$this->headScript()->appendFile($this->baseUrl().'/library/Datatables-Bootstrap3/BS3/assets/js/datatables.js');
+$this->headLink()->appendStylesheet($this->baseUrl().'/library/Datatables-Bootstrap3/BS3/assets/css/datatables.css');
+$this->headScript()->appendFile($this->baseUrl().'/js/client/index.js');
+   // echo $this->headScript();
+?>
+
+
+<div class="row" style="padding-left: 15px; padding-right: 15px;">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>CLIENTES</h1>
+        </div>
+
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <table id="clientTable" cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>CORREO</th>
+                <th>TELEFONO</th>
+                <th>RFC</th>
+                <th>COMENTARIO</th>
+                <th>DIRECCI&Oacute;N</th>
+                <th>OPERACIONES</th>           
+              </tr>
+            </thead>
+            <tbody>
+            <?php
+                foreach($this->clients as $client):
+            ?>
+            <?php if($client->getId() != 1):?>
+                   <tr>
+                    <td><?php echo $client->getId();?></td>
+                    <td><?php echo $client->getName()." ".$client->getLastName()?></td>
+                    <td><?php echo $client->getEmail();?></td>
+                    <td><?php echo $client->getPhone();?></td>
+                    <td><?php echo $client->getRfc();?></td>
+                    <td><?php echo $client->getComment();?></td>
+                    <td><?php echo $client->getAddress()->getStreet().
+                    " ".$client->getAddress()->getOutsideNumber().
+                    " ".$client->getAddress()->getInternalNumber().
+                    " ".$client->getAddress()->getColony();?></td>
+                    <td>
+                        <a href="<?php echo $this->url(array('module'=>'operator', 'controller' => 'client', 'action' => 'edit', 'id' => $client->getId()));?>">Editar</a>&nbsp;
+                  </tr>
+             <?php endif;?>
+            <?php 
+                endforeach;
+            ?>
+            </tbody>
+            </table>
+        
+        </div>
+    </div>
+</div>
+
+<div id="dialog-delete" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Eliminar cliente</h4>
+      </div>
+      <div class="modal-body">
+        <p>¿Esta seguro que desea eliminar el cliente <b id="nameClient"></b>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" onclick="deleteClient()" class="btn btn-primary">Aceptar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+   
