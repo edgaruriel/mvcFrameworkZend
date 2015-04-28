@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <?php
-    $this->headScript()->prependFile($this->baseUrl() . '/library/jqueryValidation/jquery-validation.js');
-    $this->headScript()->prependFile($this->baseUrl() . '/library/bootstrap.3.1.1/js/bootstrap.js');
-    $this->headScript()->prependFile($this->baseUrl() . '/library/jquery/jquery-1.8.2.min.js');
+    //$this->headScript()->prependFile($this->baseUrl() . '/library/jqueryValidation/jquery-validation.js');
+    //$this->headScript()->prependFile($this->baseUrl() . '/library/bootstrap.3.1.1/js/bootstrap.js');
+    //$this->headScript()->prependFile($this->baseUrl() . '/library/jquery/jquery-1.8.2.min.js');
 
     $this->headLink()->appendStylesheet($this->baseUrl() . '/css/main.css');
-    $this->headLink()->appendStylesheet($this->baseUrl() . '/library/font-awesome-4.0.3/css/font-awesome.css');
+    //$this->headLink()->appendStylesheet($this->baseUrl() . '/library/font-awesome-4.0.3/css/font-awesome.css');
     echo $this->headLink();
     echo $this->headScript();
     ?>
@@ -25,14 +25,6 @@
 	<a href="<?php echo $this->url(array('module'=>'admin','controller' => 'cash-register', 'action' => 'index'),null,true);?>" class="nav-button">Corte de caja del d&iacute;a</a>
 	<a href="<?php echo $this->url(array('controller' => 'login', 'action' => 'logout'),null,true);?>" class="exit-button right"><span class="icon fa-off"></span></a>
 </div>
-<br>
-<br>
-
-<div class="container">
-    <div class="starter-template">
-        <?php echo $this->layout()->content ?>
-    </div>
-</div>
-
+<?php echo $this->layout()->content ?>
 </body>
 </html>
