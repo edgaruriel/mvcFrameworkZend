@@ -33,9 +33,13 @@ class Admin_MovieController extends Zend_Controller_Action
 			$movie = new Application_Model_Movie();
 			$movie->createFromArray($data);
 			
-	
+	        $genderService = new Application_Service_Gender();
+	        $gender = $genderService->findById($data["genderId"]);
+	        
+	        $movie->setGender($gender);
+	        			
 			$movieService = new Application_Service_Movie();
-			$movieService->addUser($movie);
+			$movieService->addMovie($movie);
 	
 			$this->_helper->redirector('index');
 		}
@@ -60,7 +64,11 @@ class Admin_MovieController extends Zend_Controller_Action
 			
 			$movie = new Application_Model_Movie();
 			$movie->createFromArray($data);
-			$movie->setId($data["id_movie"]);
+			
+			$genderService = new Application_Service_Gender();
+			$gender = $genderService->findById($data["genderId"]);
+			 
+			$movie->setGender($gender);
 	
 			$movieService = new Application_Service_Movie();
 			$movieService->update($movie);

@@ -5,8 +5,8 @@ $client = $this->client;
 
 <div class="container center">
 	<div class="header">Editar: <?php echo $client->name;?></div>
-            <form action="../Client/updateClient" id="form" name="form" method="post" class="form-group">
-                <input type="hidden" id="id" name="id" value="<?php echo $client->id;?>">
+            <form action="<?php echo $this->url(array('module'=>'operator','controller' => 'client', 'action' => 'update',null,true));?>" id="form" name="form" method="post" class="form-group">
+                <input type="hidden" id="id" name="id" value="<?php echo $client->getId();?>">
                     
                     <label ><span>Nombre: </span></label><input type="text" id="name" name="name" value="<?php echo $client->getName();?>"/>
 
@@ -17,7 +17,7 @@ $client = $this->client;
                     <label ><span>IFE: </span></label><input type="text" id="ife" name="ife" value="<?php echo $client->getIfe();?>"/>
                 <br>
                 <input type="submit" name="editBtn" id="editBtn" value="Actualizar" class="right verde">
-                <a id="btn_cancelar" value="Cancelar" href="../Client/listClient" class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
+                <a id="btn_cancelar" value="Cancelar" href="<?php echo $this->url(array('module'=>'operator','controller' => 'client', 'action' => 'index'),null,true);?>" class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
             </form>
 	<br><br><br>
 </div>

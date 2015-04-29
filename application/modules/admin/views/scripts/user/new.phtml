@@ -12,7 +12,7 @@ $this->headScript()->appendFile($this->baseUrl().'/js/admin/user/new.js');
 <div class="container center">
 	<div class="header">Nuevo Empleado</div>
         <div >
-            <form action="../User/addUser" id="form" name="form" method="post" class="form-group">
+            <form action="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'new'),null,true);?>" id="form" name="form" method="post" class="form-group">
                  
                     <label ><span>Nombre de usuario:</span></label><input type="text" id="username" name="username"/>
 
@@ -28,13 +28,13 @@ $this->headScript()->appendFile($this->baseUrl().'/js/admin/user/new.js');
 					<select id="typeUserId" name="typeUserId">
                     <option value="">Seleccione un tipo</option>
                     <?php 
-                    foreach ($types as $type):?>
-                    <option value="<?php echo $type->id;?>"><?php echo $type->name;?></option>
+                    foreach ($this->typeUsers as $type):?>
+                    <option value="<?php echo $type->getId();?>"><?php echo $type->getName();?></option>
 				<?php endforeach;;?>                    
                     </select>
                     </label>
                 <input type="submit" name="newBtn" id="newBtn" value="Agregar" class="right verde">
-                <a id="btn_cancelar" value="Cancelar" href="../User/listUser" class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
+                <a id="btn_cancelar" value="Cancelar" href="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'index'),null,true);?>" class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
                 <br>
                 <br>
                 <br>

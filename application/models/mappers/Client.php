@@ -72,7 +72,7 @@ class Application_Model_Mapper_Client implements Application_Model_Mapper_Abstra
 	public function findAll() {
 		// TODO Auto-generated method stub
 		$clientArray = array();
-		$result = $this->clientDbTable->fetchAll()->toArray();
+		$result = $this->clientDbTable->fetchAll($this->clientDbTable->select()->where("status=?",true))->toArray();
 		 
 		foreach($result as $row){
 			$client = new Application_Model_Client();			

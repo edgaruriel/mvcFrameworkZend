@@ -33,12 +33,20 @@ class Admin_UserController extends Zend_Controller_Action
 			$user = new Application_Model_User();
 			$user->createFromArray($data);
 			
-	
+			$typeUserService = new Application_Service_TypeUser();
+			$typeUser = $typeUserService->findById($data["typeUserId"]);
+			
+			$user->setTypeUser($typeUser);
+			
 			$userService = new Application_Service_User();
 			$userService->addUser($user);
+			
 	
 			$this->_helper->redirector('index');
 		}
+		
+		$typeUserService = new Application_Service_TypeUser();
+		$this->view->typeUsers = $typeUserService->findAll();
 	}
 	
 	public function editAction(){
@@ -46,6 +54,9 @@ class Admin_UserController extends Zend_Controller_Action
 	
 		$userService = new Application_Service_User();
 		$this->view->user = $userService->findById($idUser);
+		
+		$typeUserService = new Application_Service_TypeUser();
+		$this->view->typeUsers = $typeUserService->findAll();
 	}
 	
 	public function updateAction(){
@@ -54,7 +65,11 @@ class Admin_UserController extends Zend_Controller_Action
 			
 			$user = new Application_Model_User();
 			$user->createFromArray($data);
-			$user->setId($data["id_user"]);
+			
+			$typeUserService = new Application_Service_TypeUser();
+			$typeUser = $typeUserService->findById($data["typeUserId"]);
+				
+			$user->setTypeUser($typeUser);
 	
 			$userService = new Application_Service_User();
 			$userService->update($user);
