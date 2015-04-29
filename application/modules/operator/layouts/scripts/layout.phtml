@@ -19,9 +19,9 @@
 </head>
 <body>
     <div class="nav">
-	<a href="../Client/listClient" class="nav-button">Catalogo de clientes</a>
-	<a href="../Cash/cashEmployee" class="nav-button">Corte de caja del d&iacute;a</a>
-	<a href="../RentedMovie/index" class="nav-button">Rentar pelicula</a>
+	<a href="<?php echo $this->url(array('module'=>'operator','controller' => 'client', 'action' => 'index'),null,true);?>" class="nav-button">Catalogo de clientes</a>
+	<a href="<?php echo $this->url(array('module'=>'operator','controller' => 'cash-register', 'action' => 'index'),null,true);?>" class="nav-button">Corte de caja del d&iacute;a</a>
+	<a href="<?php echo $this->url(array('module'=>'operator','controller' => 'rented-movies', 'action' => 'index'),null,true);?>" class="nav-button">Rentar pelicula</a>
 	<a href="<?php echo $this->url(array('controller' => 'login', 'action' => 'logout'),null,true);?>" class="exit-button right"><span class="icon fa-off"></span></a>
     </div>
 

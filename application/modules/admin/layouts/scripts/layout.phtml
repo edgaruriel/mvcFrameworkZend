@@ -17,21 +17,12 @@
     echo $this->headScript();
     ?>
     <title>Videoclub</title>
-    <style type="text/css">
-        body {
-            padding-top: 50px;
-        }
-
-        .starter-template {
-            padding: 40px 15px;
-        }
-    </style>
 </head>
 <body>
 <div class="nav">
 	<a href="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'index'),null,true);?>" class="nav-button">Catalogo de usuarios</a>
-	<a href="../Movie/listMovies" class="nav-button">Catalogo de peliculas</a>
-	<a href="../Cash/cashAdmin" class="nav-button">Corte de caja del d&iacute;a</a>
+	<a href="<?php echo $this->url(array('module'=>'admin','controller' => 'movie', 'action' => 'index'),null,true);?>" class="nav-button">Catalogo de pel&iacute;culas</a>
+	<a href="<?php echo $this->url(array('module'=>'admin','controller' => 'cash-register', 'action' => 'index'),null,true);?>" class="nav-button">Corte de caja del d&iacute;a</a>
 	<a href="<?php echo $this->url(array('controller' => 'login', 'action' => 'logout'),null,true);?>" class="exit-button right"><span class="icon fa-off"></span></a>
 </div>
 <br>

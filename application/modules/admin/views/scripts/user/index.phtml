@@ -2,7 +2,6 @@
 $this->headScript()->appendFile($this->baseUrl().'/library/DataTables1.9/media/js/jquery.dataTables.js');
 $this->headScript()->appendFile($this->baseUrl().'/library/Datatables-Bootstrap3/BS3/assets/js/datatables.js');
 $this->headLink()->appendStylesheet($this->baseUrl().'/library/Datatables-Bootstrap3/BS3/assets/css/datatables.css');
-    $this->headScript()->appendFile($this->baseUrl().'/js/user/index.js');
     //echo $this->headScript();
 ?>
 <div class="container center" >
@@ -10,7 +9,7 @@ $this->headLink()->appendStylesheet($this->baseUrl().'/library/Datatables-Bootst
         <div>
             <div class="actions">
 	            <a href="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'new'),null,true);?>" class="button right verde"><span class="icon fa-plus"></span>Agregar Empleado</a>
-	            <a href="../Index/indexAdmin" class="button left azul"><span class="icon fa-home"></span>Regresar</a>
+	            <a href="<?php echo $this->url(array('module'=>'admin','controller' => 'index', 'action' => 'index'),null,true);?>" class="button left azul"><span class="icon fa-home"></span>Regresar</a>
             </div>
             <table>
                 <thead>

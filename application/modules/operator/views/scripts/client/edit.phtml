@@ -1,196 +1,23 @@
 <?php
-$this->headLink()->appendStylesheet($this->baseUrl() . '/css/default/required.css');
-$this->headScript()->appendFile($this->baseUrl() . '/js/client/edit.js');
+$this->headScript()->appendFile($this->baseUrl() . '/js/employee/client/edit.js');
+$client = $this->client;
 ?>
 
-<div class="row">
-    <div class="col-md-12">
-        <h1>Editar Cliente</h1>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <form id="form"
-              action="<?php echo $this->url(array('module' => 'operator', 'controller' => 'client', 'action' => 'update')); ?>"
-              method="post" class="form-horizontal" role="form">
-            <input type="hidden" id="WithAddress" name="WithAddress" value="">
+<div class="container center">
+	<div class="header">Editar: <?php echo $client->name;?></div>
+            <form action="../Client/updateClient" id="form" name="form" method="post" class="form-group">
+                <input type="hidden" id="id" name="id" value="<?php echo $client->id;?>">
+                    
+                    <label ><span>Nombre: </span></label><input type="text" id="name" name="name" value="<?php echo $client->getName();?>"/>
 
-            <div class="form-group">
-                <label for="name" class="col-md-2 control-label"><label class="required">*</label> Nombre:</label>
+                    <label ><span>Apellido(s): </span></label><input type="text" id="lastName" name="lastName" value="<?php echo $client->getLastName();?>"/>
 
-                <div class="col-md-3">
-                    <input type="text" id="name" name="name" class="form-control :required" placeholder="Nombre"
-                           value="<?php echo $this->client->getName(); ?>"/>
-                </div>
+                    <label ><span>Correo: </span></label><input type="text" id="email" name="email" value="<?php echo $client->getEmail();?>"/>
 
-                <label for="lastName" class="col-md-2 control-label"><label class="required">*</label>
-                    Apellidos:</label>
-
-                <div class="col-md-3">
-                    <input type="text" id="lastName" name="lastName" class="form-control :required"
-                           placeholder="Apellidos" value="<?php echo $this->client->getLastName(); ?>"/>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="email" class="col-md-2 control-label">Correo:</label>
-
-                <div class="col-md-3">
-                    <input type="text" id="email" name="email" class="form-control :email" placeholder="Correo"
-                           value="<?php echo $this->client->getEmail(); ?>"/>
-                </div>
-
-                <label for="phone" class="col-md-2 control-label"><label class="required">*</label> N&uacute;mero
-                    telefonico:</label>
-
-                <div class="col-md-3">
-                    <input type="text" id="phone" name="phone" class="form-control :required :number"
-                           placeholder="N&uacute;mero telefonico" value="<?php echo $this->client->getPhone(); ?>"/>
-                </div>
-
-                <div id="errorPhone" class="col-md-3" style="display: none;">
-                    <label class="required">El número telefonico ya existe</label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="rfc" class="col-md-2 control-label">RFC:</label>
-
-                <div class="col-md-3">
-                    <input type="text" id="rfc" name="rfc" class="form-control" placeholder="RFC"
-                           value="<?php echo $this->client->getRfc(); ?>"/>
-                </div>
-
-                <label for="comment" class="col-md-2 control-label">Comentario:</label>
-
-                <div class="col-md-3">
-                    <textarea rows="5" cols="60" id="comment" name="comment" class="form-control"
-                              value=""><?php echo $this->client->getComment(); ?></textarea>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                        <label>
-                            <?php //checked
-                            if ($this->client->getAddress()->getStreet() != null):
-                                ?>
-                                <input type="checkbox" id="address" name="address" onchange="optionAddress()"
-                                       checked> Agregar direcci&oacute;n
-                            <?php else: ?>
-                                <input type="checkbox" id="address" name="address"
-                                       onchange="optionAddress()"> Agregar direcci&oacute;n
-                            <?php endif; ?>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div id="addAddress" style="display: none;">
-                <div class="col-md-12">
-                    <h3>Informaci&oacute;n de direcci&oacute;n</h3>
-                </div>
-
-                <div class="form-group">
-                    <label for="street" class="col-md-2 control-label"><label class="required">*</label> Calle:</label>
-
-                    <div class="col-md-3">
-                        <input type="text" id="street" name="street" class="form-control :required" placeholder="Calle"
-                               value="<?php echo $this->client->getAddress()->getStreet(); ?>"/>
-                    </div>
-
-                    <label for="outsideNumber" class="col-md-2 control-label"><label class="required">*</label> N&uacute;mero
-                        exterior:</label>
-
-                    <div class="col-md-3">
-                        <input type="text" id="outsideNumber" name="outsideNumber" class="form-control :required"
-                               placeholder="N&uacute;mero exterior"
-                               value="<?php echo $this->client->getAddress()->getOutsideNumber(); ?>"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="internalNumber" class="col-md-2 control-label"><label class="required">*</label> N&uacute;mero
-                        interior:</label>
-
-                    <div class="col-md-3">
-                        <input type="text" id="internalNumber" name="internalNumber" class="form-control"
-                               placeholder="N&uacute;mero interior"
-                               value="<?php echo $this->client->getAddress()->getInternalNumber(); ?>"/>
-                    </div>
-
-                    <label for="colony" class="col-md-2 control-label"><label class="required">*</label>
-                        Colonia:</label>
-
-                    <div class="col-md-3">
-                        <input type="text" id="colony" name="colony" class="form-control :required"
-                               placeholder="Colonia" value="<?php echo $this->client->getAddress()->getColony(); ?>"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="state" class="col-md-2 control-label"><label class="required">*</label> Estado:</label>
-
-                    <div class="col-md-3">
-                        <input type="text" id="state" name="state" class="form-control :required" placeholder="Estado"
-                               value="<?php echo $this->client->getAddress()->getState(); ?>"/>
-                    </div>
-
-                    <label for="municipality" class="col-md-2 control-label"><label class="required">*</label>
-                        Municipio:</label>
-
-                    <div class="col-md-3">
-                        <input type="text" id="municipality" name="municipality" class="form-control :required"
-                               placeholder="Municipio"
-                               value="<?php echo $this->client->getAddress()->getMunicipality(); ?>"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="postalNode" class="col-md-2 control-label"><label class="required">*</label> C&oacute;digo
-                        postal:</label>
-
-                    <div class="col-md-3">
-                        <input type="text" id="postalCode" name="postalCode" class="form-control"
-                               placeholder="C&oacute;digo postal"
-                               value="<?php echo $this->client->getAddress()->getPostalCode(); ?>"/>
-                    </div>
-
-                    <label for="country" class="col-md-2 control-label"><label class="required">*</label>
-                        Pa&iacute;s:</label>
-
-                    <div class="col-md-3">
-                        <input type="text" id="country" name="country" class="form-control :required"
-                               placeholder="Pa&iacute;s"
-                               value="<?php echo $this->client->getAddress()->getCountry(); ?>"/>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="location" class="col-md-2 control-label"><label class="required">*</label> Localidad
-                        (Ciudad):</label>
-
-                    <div class="col-md-3">
-                        <input type="text" id="location" name="location" class="form-control" placeholder="Localidad"
-                               value="<?php echo $this->client->getAddress()->getLocation(); ?>"/>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-1 col-md-3">
-                    <input type="submit" value="Aceptar" class="btn btn-primary pull-right"/>
-                    <a href="<?php echo $this->url(array('module' => 'operator', 'controller' => 'client', 'action' => 'index')); ?>"
-                       class="btn btn-default pull-right" style="margin-right: 10px;">Cancelar</a>
-                </div>
-            </div>
-
-            <input type="hidden" id="id_client" name="id_client" value="<?php echo $this->client->getId(); ?>"/>
-            <input type="hidden" id="id_address" name="id_address" value="<?php echo $this->client->getId(); ?>"/>
-
-
-        </form>
-    </div>
+                    <label ><span>IFE: </span></label><input type="text" id="ife" name="ife" value="<?php echo $client->getIfe();?>"/>
+                <br>
+                <input type="submit" name="editBtn" id="editBtn" value="Actualizar" class="right verde">
+                <a id="btn_cancelar" value="Cancelar" href="../Client/listClient" class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
+            </form>
+	<br><br><br>
 </div>

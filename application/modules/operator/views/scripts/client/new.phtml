@@ -1,155 +1,21 @@
 <?php
-$this->headLink()->appendStylesheet($this->baseUrl().'/css/default/required.css');
-$this->headScript()->appendFile($this->baseUrl().'/js/client/new.js');
+$this->headScript()->appendFile($this->baseUrl().'/js/employee/client/new.js');
 ?>
 
-<div class="row">
-    <div class="col-md-12">
-        <h1>Nuevo Cliente</h1>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <form id="form" action="<?php echo $this->url(array('module'=>'operator', 'controller' => 'client', 'action' => 'new'));?>" method="post" class="form-horizontal" role="form">
-            
-             <div class="form-group">
-                <label for="name" class="col-md-2 control-label"><span class="required">*</span> Nombre:</label>
-                <div class="col-md-3">
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Nombre"/>
-                </div>
-                
-                <label for="lastName" class="col-md-2 control-label"><span class="required">*</span> Apellidos:</label>
-                <div class="col-md-3">
-                    <input type="text" id="lastName" name="lastName" class="form-control " placeholder="Apellidos"/>
-                </div>
-                
-             </div>
-             
-              <div class="form-group">
-                <label for="email" class="col-md-2 control-label"> Correo:</label>
-                <div class="col-md-3">
-                    <input type="text" id="email" name="email" class="form-control " placeholder="Correo"/>
-                </div>
-                
-                <label for="phone" class="col-md-2 control-label"><span class="required">*</span> N&uacute;mero telefonico:</label>
-                <div class="col-md-3">
-                    <div class="row">
-                        <div class="col-md-12">
-                        <input type="text" id="phone" name="phone" class="form-control " placeholder="N&uacute;mero telefonico"/>
-                        </div> 
-                    </div>
-                    <div class="row">
-                        <div id="errorPhone" class="col-md-12" style="display: none;">
-                            <label class="required">El número telefonico ya existe</label>
-                        </div>
-                    </div>
-                </div>
-             </div>
-             
-             
-              <div class="form-group">
-                 <label for="rfc" class="col-md-2 control-label"> RFC:</label>
-                <div class="col-md-3">
-                    <div class="row">
-                         <div class="col-md-12">
-                            <input type="text" id="rfc" name="rfc" class="form-control" placeholder="RFC"/>
-                         </div>
-                    </div>
-                    <div class="row">
-                        <div id="errorRFC" class="col-md-12" style="display: none;">
-                             <label class="required">El RFC es incorrecto</label>
-                         </div>
-                    </div>
-                </div>
-                                   
-                  <label for="comment" class="col-md-2 control-label"> Comentario:</label>
-                <div class="col-md-3">
-                   <textarea rows="5" cols="60" id="comment" name="comment" class="form-control"></textarea>
-                </div>
-             </div>
-              
-              <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" id="address" name="address" onchange="optionAddress()"> Agregar direcci&oacute;n
-                    </label>
-                  </div>
-                </div>
-              </div>
-            
-            <div id="addAddress" style="display: none;">
-                     <div class="col-md-12">
-                        <h3>Informaci&oacute;n de direcci&oacute;n</h3>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="street" class="col-md-2 control-label"><span class="required">*</span> Calle:</label>
-                        <div class="col-md-3">
-                            <input type="text" id="street" name="street" class="form-control :required" placeholder="Calle"/>
-                        </div>
-                        
-                         <label for="outsideNumber" class="col-md-2 control-label"><span class="required">*</span> N&uacute;mero exterior:</label>
-                        <div class="col-md-3">
-                            <input type="text" id="outsideNumber" name="outsideNumber" class="form-control :required" placeholder="N&uacute;mero exterior"/>
-                        </div>
-                     </div>
-                     
-                     <div class="form-group">
-                        <label for="internalNumber" class="col-md-2 control-label"><span class="required">*</span> N&uacute;mero interior:</label>
-                        <div class="col-md-3">
-                            <input type="text" id="internalNumber" name="internalNumber" class="form-control" placeholder="N&uacute;mero interior"/>
-                        </div>
-                        
-                         <label for="colony" class="col-md-2 control-label"><span class="required">*</span> Colonia:</label>
-                        <div class="col-md-3">
-                            <input type="text" id="colony" name="colony" class="form-control :required" placeholder="Colonia"/>
-                        </div>
-                     </div>
-                     
-                      <div class="form-group">
-                         <label for="state" class="col-md-2 control-label"><span class="required">*</span> Estado:</label>
-                        <div class="col-md-3">
-                            <input type="text" id="state" name="state" class="form-control :required" placeholder="Estado"/>
-                        </div>
-                        
-                         <label for="municipality" class="col-md-2 control-label"><span class="required">*</span> Municipio:</label>
-                        <div class="col-md-3">
-                            <input type="text" id="municipality" name="municipality" class="form-control :required" placeholder="Municipio"/>
-                        </div>
-                     </div>
-                     
-                      <div class="form-group">
-                         <label for="postalNode" class="col-md-2 control-label"><span class="required">*</span> C&oacute;digo postal:</label>
-                        <div class="col-md-3">
-                            <input type="text" id="postalCode" name="postalCode" class="form-control" placeholder="C&oacute;digo postal"/>
-                        </div>
-                        
-                         <label for="country" class="col-md-2 control-label"><span class="required">*</span> Pa&iacute;s:</label>
-                        <div class="col-md-3">
-                            <input type="text" id="country" name="country" class="form-control :required" placeholder="Pa&iacute;s"/>
-                        </div>
-                     </div>
-                     
-                      <div class="form-group">
-                         <label for="location" class="col-md-2 control-label"><span class="required">*</span> Localidad (Ciudad):</label>
-                        <div class="col-md-3">
-                            <input type="text" id="location" name="location" class="form-control" placeholder="Localidad"/>
-                        </div>                
-                        
-                     </div>
-             
-            </div>             
-            
-             
-             <div class="form-group">
-            <div class="col-md-offset-1 col-md-3">
-                <input type="submit" value="Aceptar" class="btn btn-primary pull-right" />
-                <a href="<?php echo $this->url(array('module'=>'operator', 'controller' => 'client', 'action' => 'index'));?>" class="btn btn-default pull-right" style="margin-right: 10px;">Cancelar</a>
-            </div>
-          </div>
-         
-            
-        </form>
-    </div>
+<div class="container center">
+    <div class="header">Nuevo Cliente</div>
+            <form action="../Client/addClient" id="form" name="form" method="post" class="form-group">
+
+                    <label ><span>Nombre: </span></label><input type="text" id="name" name="name"/>
+
+                    <label ><span>Apellido(s): </span></label><input type="text" id="lastName" name="lastName"/>
+
+                    <label ><span>Correo: </span></label><input type="text" id="email" name="email"/>
+
+                    <label ><span>IFE: </span></label><input type="text" id="ife" name="ife"/>
+				<br>
+                <input type="submit" name="newBtn" id="newBtn" value="Agregar" class="right verde">
+                <a id="btn_cancelar" value="Cancelar" href="../Client/listClient"class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
+            </form>
+     <br><br><br>
 </div>

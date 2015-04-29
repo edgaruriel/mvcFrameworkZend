@@ -2,87 +2,47 @@
 $this->headScript()->appendFile($this->baseUrl().'/library/DataTables1.9/media/js/jquery.dataTables.js');
 $this->headScript()->appendFile($this->baseUrl().'/library/Datatables-Bootstrap3/BS3/assets/js/datatables.js');
 $this->headLink()->appendStylesheet($this->baseUrl().'/library/Datatables-Bootstrap3/BS3/assets/css/datatables.css');
-    $this->headScript()->appendFile($this->baseUrl().'/js/user/index.js');
-    //echo $this->headScript();
-   $session = new Zend_Session_Namespace('cubilaundry');
-    if(Application_Service_Authentication::getInstance()->getTypeUser()==Application_Model_TypeUser::$typeUserArray["GERENTE"]){
-        $id = $session->user->id;
-    }else if(Application_Service_Authentication::getInstance()->getTypeUser()==Application_Model_TypeUser::$typeUserArray["SUPERVISOR"]){
-        $id = $session->user->user->id;
-    }
+    $this->headScript()->appendFile($this->baseUrl().'/js/admin/movie/index.js');
     
 ?>
-<div class="row" style="padding-left: 15px; padding-right: 15px;">
-    <div class="row">
-        <div class="col-md-6">
-            <h1>USUARIOS</h1>
-        </div>
-        <div class="col-md-6">
-            <a class="btn btn-success pull-right" href="<?php echo $this->url(array('module'=>'admin', 'controller' => 'user', 'action' => 'new'), null, false); ?>">Registrar nuevo usuario </a>
-        </div>
-    </div>
-     <hr/>
-     
-    <div class="row">
-        <div class="col-md-12">
-     <table id="userTable" cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered">
-     <thead>
-      <tr>
-        <th>ID</th>
-        <th>NOMBRE</th>
-        <th>APELLIDO</th>
-        <th>NOMBRE DE USUARIO</th>
-        <th>TIPO DE USUARIO</th>
-        <th>OPCIONES</th>
-      </tr>
-      </thead>
-      
-      <tbody>
-<?php
-    foreach($this->users as $user):
-?>
-    <?php if ($user->getTypeUsers()->getId()!=Application_Model_TypeUser::$typeUserArray["EMPLEADO"]):?>
-        <?php if($id!=$user->getId()&&$user->getId()!=1):?>
-      <tr>
-        <td><?php echo $user->getId();?></td>
-        <td><?php echo $user->getName();?></td>
-        <td><?php echo $user->getLastName();?></td>
-        <td><?php echo $user->getUserName();?></td>
-        <td><?php echo $user->getTypeUsers()->getName();?></td>
-        <td>
-            <a href="<?php echo $this->url(array('module'=>'admin', 'controller' => 'user', 'action' => 'edit', 'id' => $user->getId()));?>">Editar</a>&nbsp;
-            <?php if($user->getId() != 1):?>
-            <a href="#" onclick="confirmDeleteUser(<?php echo $user->getId();?>,'<?php echo $user->getName();?>')">Eliminar</a>
-            <?php endif;?> 
-        </td>
-      </tr>
-      <?php endif;?>
-      <?php endif;?>
-      <?php 
-        endforeach;
-        ?>
-        </tbody>
-    </table>
-    </div>
+<?php ?>
+<div class="container center" >
+	<input type="hidden" id="idRefresh" name="idRefresh" value="<?php echo (isset($_GET["refresh"]))? $_GET["refresh"]: "";?>"/>
+	<div class="header">Peliculas</div>
+        <div>
+            <div class="actions">
+	            <a href="<?php echo $this->url(array('module'=>'admin','controller' => 'movie', 'action' => 'new'),null,true);?>" class="button right verde"><span class="icon fa-plus"></span>Agregar Pelicula</a>
+	            <a href="<?php echo $this->url(array('module'=>'admin','controller' => 'index', 'action' => 'index'),null,true);?>" class="button left azul"><span class="icon fa-home"></span>Regresar</a>
+            </div>
+            <table style="" border="1">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Titulo</th>
+                        <th>Disponibles</th>
+                        <th>Precio</th>
+                        <th>Genero</th>
+                        <th>OPERACIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($this->movies as $movie):?>
+                        <tr>
+                            <td><?php echo $movie->getId();?></td>
+                            <td><?php echo utf8_encode($movie->getTitle());?></td>
+                            <?php $available = ($movie->getTotalUnits()) - ($movie->getRentedUnits());?>
+                            <td><?php echo $available;?></td>
+                            <td><?php echo '$'.number_format($movie->getPrice(),2);?></td>
+                            <td><?php echo utf8_encode($movie->getGender()->getName());?></td>
+                            <td>
+                                <a href="<?php echo $this->url(array('module'=>'admin','controller' => 'movie', 'action' => 'edit', 'id'=>$movie->getId()),null,true);?>" class="s-button verde"><span class="s-icon fa-edit"></span></a>
+                                <a href="deleteMovie?id=<?php echo $movie->id;?>" class="s-button rojo"><span class="s-icon fa-trash"></span></a>
+                            </td>
+                        </tr>
+                    <?php endforeach;?>
+                </tbody>
+            </table>
     </div>
 </div>
 
-<div id="dialog-delete" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Eliminar Usuario</h4>
-      </div>
-      <div class="modal-body">
-        <p>¿Esta seguro que desea eliminar el usuario <b id="nameUser"></b>?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" onclick="deleteUser()" class="btn btn-primary">Aceptar</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-   
+ 

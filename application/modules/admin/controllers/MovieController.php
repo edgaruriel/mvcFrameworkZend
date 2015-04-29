@@ -15,7 +15,7 @@ class Admin_MovieController extends Zend_Controller_Action
     public function init()
     {
     	/* Initialize action controller here */
-    	$this->view->controller = 'catalog';
+    	$this->view->controller = 'movie';
     	$this->view->action = $this->getRequest()->getActionName();
     }
     /**
@@ -39,6 +39,9 @@ class Admin_MovieController extends Zend_Controller_Action
 	
 			$this->_helper->redirector('index');
 		}
+		
+		$genderService = new Application_Service_Gender();
+		$this->view->genders = $genderService->findAll();
 	}
 	
 	public function editAction(){
@@ -46,6 +49,9 @@ class Admin_MovieController extends Zend_Controller_Action
 	
 		$movieService = new Application_Service_Movie();
 		$this->view->movie = $movieService->findById($idMovie);
+		
+		$genderService = new Application_Service_Gender();
+		$this->view->genders = $genderService->findAll();
 	}
 	
 	public function updateAction(){
@@ -54,7 +60,7 @@ class Admin_MovieController extends Zend_Controller_Action
 			
 			$movie = new Application_Model_Movie();
 			$movie->createFromArray($data);
-			$movie->setId($data["id_user"]);
+			$movie->setId($data["id_movie"]);
 	
 			$movieService = new Application_Service_Movie();
 			$movieService->update($movie);
@@ -67,7 +73,7 @@ class Admin_MovieController extends Zend_Controller_Action
 	public function deleteAction(){
 		$idMovie = $this->getRequest()->getParam('id');
 	
-		$movie = new Application_Model_User();
+		$movie = new Application_Model_Movie();
 		$movie->setId($idMovie);
 	
 		$movieService = new Application_Service_Movie();

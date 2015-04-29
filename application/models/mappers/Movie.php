@@ -94,6 +94,7 @@ class Application_Model_Mapper_Movie implements Application_Model_Mapper_Abstrac
     		$movie = new Application_Model_Movie();
     		$movie->createFromDbTable($row);
     		$movie->setGender($gender);
+    		array_push($movieArray,$movie);
 		}
 		return $movieArray;
 	}

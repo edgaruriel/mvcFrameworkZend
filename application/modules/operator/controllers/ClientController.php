@@ -9,7 +9,7 @@ class Operator_ClientController extends Zend_Controller_Action
     	if (!Application_Service_Authentication::getInstance()->isAuthentication()) {
     		$this->_redirect('login');
     	}else{
-    		if(Application_Service_Authentication::getInstance()->getTypeUser()==2){
+    		if(Application_Service_Authentication::getInstance()->getTypeUser()==1){
     		    $this->_redirect('login');
     		}
     	}

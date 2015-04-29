@@ -2,6 +2,7 @@
 
 class Application_Model_Movie extends Application_Model_Abstract
 {
+    public $id;
 	public $title;
 	public $format;
 	public $totalUnits;
@@ -13,6 +14,22 @@ class Application_Model_Movie extends Application_Model_Abstract
 	public $status;
 	public $rentedUnits;
 	
+	
+	
+	/**
+	 * @return the $id
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * @param field_type $id
+	 */
+	public function setId($id) {
+		$this->id = $id;
+	}
+
 	/**
 	 * @return the $title
 	 */
