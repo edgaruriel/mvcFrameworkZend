@@ -3,6 +3,7 @@ class Application_Model_Mapper_Movie implements Application_Model_Mapper_Abstrac
 {
 	
 	private $movieDbTable;
+	private $clientHasMovieDbTable;
 	
 	/* (non-PHPdoc)
 	 * @see Application_Model_Mapper_Abstract::__construct()
@@ -10,6 +11,7 @@ class Application_Model_Mapper_Movie implements Application_Model_Mapper_Abstrac
 	public function __construct() {
 		// TODO Auto-generated method stub
 		$this->movieDbTable = new Application_Model_DbTable_Movie();
+		$this->clientHasMovieDbTable = new Application_Model_DbTable_ClientHasMovie();
 	}
 
 	/* (non-PHPdoc)
@@ -105,7 +107,35 @@ class Application_Model_Mapper_Movie implements Application_Model_Mapper_Abstrac
 		
 	}
 
+	public function findAllMovieToday(){
+		$date = Date("Y-m-d");
+		
+		$sql = $this->clientHasMovieDbTable->select()->where("DATE_FORMAT(date, '%Y-%m-%d') = ?",$date);
+		
+		$registers = $this->clientHasMovieDbTable->fetchAll($sql)->toArray();
+		$arrayIdMovies = array();
+		$arrayMovies = array();
 	
+		foreach($registers as $register){
+			if(!in_array($register["movie_id"],$arrayIdMovies)){
+				array_push($arrayIdMovies,$register["movie_id"]);
+			}
+		}
+	
+		foreach($arrayIdMovies as $id){			
+			$sql = $this->clientHasMovieDbTable->select()->from('client_has_movie','sum(client_has_movie.rented_units) as total')
+			->where("movie_id = ?", $id)
+			->where("DATE_FORMAT(date, '%Y-%m-%d')=?",$date);
+				
+			$result = $this->clientHasMovieDbTable->fetchRow($sql)->toArray();
+	
+			$movieService = new Application_Service_Movie();
+			$movie = $movieService->findById($id);
+			array_push($arrayMovies,array("units"=>$result["total"],"movie"=>$movie));
+		}
+	
+		return $arrayMovies;
+	}
 	
 	
 }

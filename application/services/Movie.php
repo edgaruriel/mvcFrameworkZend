@@ -27,6 +27,10 @@ class Application_Service_Movie
 	public function update($movie){
 		$this->movieMapper->update($movie);
 	}
+	
+	public function findAllMovieToday(){
+	    return $this->movieMapper->findAllMovieToday();
+	}
 }
 
 ?>

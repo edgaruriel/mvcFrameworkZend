@@ -22,7 +22,8 @@ class Operator_CashRegisterController extends Zend_Controller_Action
      * The default action - show the home page
      */
     public function indexAction(){
-        
+        $movieService = new Application_Service_Movie();
+        $this->view->moviesRented = $movieService->findAllMovieToday();
     }
     
 }
