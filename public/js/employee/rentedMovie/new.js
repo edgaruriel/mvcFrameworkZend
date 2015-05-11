@@ -2,10 +2,10 @@ var MOVIES;
 var ADD_MOVIES = new Array();
 var ajax = {};
 window.onload = function() {
-	document.getElementById("numberMovie").onkeypress= function(){return justNumbers(event)};
-	 document.getElementById("btnNew").onclick = function(){return rentedMovies()};
+	document.getElementById("numberMovie").onkeypress= function(){return justNumbers(event);};
+	 document.getElementById("btnNew").onclick = function(){return rentedMovies();};
 	MOVIES = JSON.parse(document.getElementById("allMovie").value);
-}
+};
 
 function addMovie(){
 var selectedMovie =	document.getElementById("movie").value;
@@ -111,7 +111,7 @@ function validateMovie(idSelected,amountMovie){
 			if(amountMovie <= existUnits && existUnits != 0 && amountMovie != 0){
 				flag = true;
 			}else{
-				alert("El n�mero de peliculas disponibles para este titulo es: "+existUnits);
+				alert("El número de peliculas disponibles para este titulo es: "+existUnits);
 				flag = false;
 			}
 			break;
@@ -119,6 +119,7 @@ function validateMovie(idSelected,amountMovie){
 			//console.log('No se encontro el '+idSelected+ " Paso: "+movieAux.id);
 		}
 	}
+	//console.log(flag);
 	return flag;
 }
 
@@ -153,7 +154,7 @@ var Movie = function(){
 	this.title;
 	this.year;
 	this.numberMovie;
-}
+};
 
 
 function justNumbers(e)

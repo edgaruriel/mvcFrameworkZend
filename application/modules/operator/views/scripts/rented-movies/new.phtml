@@ -3,7 +3,7 @@ $this->headScript()->appendFile($this->baseUrl().'/js/employee/rentedMovie/new.j
 ?>
 
 <div class="container center">
- <form action="../RentedMovie/add" id="form" name="form" method="post" class="form-group">
+ <form action="<?php echo $this->url(array('module'=>'operator','controller' => 'rented-movies', 'action' => 'new'),null,true);?>" id="form" name="form" method="post" class="">
 	<div class="header">Nueva Renta</div>
 	<div class="form-group">
 		<label><span>Cliente:</span></label>
@@ -23,7 +23,7 @@ $this->headScript()->appendFile($this->baseUrl().'/js/employee/rentedMovie/new.j
 			<?php 
 			$arrayAux = Array();
 			foreach ($this->movies as $movie):
-			//array_push($arrayAux, $movie->columns);
+			array_push($arrayAux, $movie);
 			?>
 			<option value="<?php echo $movie->getId();?>"><?php echo $movie->getTitle().' ('.$movie->getYear().')'.' Disponibles '.($movie->getTotalUnits() - $movie->getRentedUnits());?></option>
 			<?php endforeach;?>
@@ -52,6 +52,6 @@ $this->headScript()->appendFile($this->baseUrl().'/js/employee/rentedMovie/new.j
 		<input type="hidden" id="movies" name="movies" value=""/>
 	<button type="submit" class="verde right" id="btnNew" name="btnNew">Rentar</button>
 	</form>
-	<a id="btn_cancelar" value="Cancelar" href="../RentedMovie/index" class="button azul left"><span class="icon fa-times"></span>Cancelar</a>
+	<a href="<?php echo $this->url(array('module'=>'operator','controller' => 'rented-movies', 'action' => 'index'),null,true);?>" class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
 	<br><br><br>
 </div>

@@ -1,13 +1,14 @@
 <?php 
-$this->headScript()->appendFile($this->baseUrl().'/library/DataTables1.9/media/js/jquery.dataTables.js');
-$this->headScript()->appendFile($this->baseUrl().'/library/Datatables-Bootstrap3/BS3/assets/js/datatables.js');
+// $this->headScript()->appendFile($this->baseUrl().'/library/Datatables-Bootstrap3/BS3/assets/js/datatables.js');
+// $this->headScript()->appendFile($this->baseUrl().'/library/DataTables1.9/media/js/jquery.dataTables.js');
+
 $this->headLink()->appendStylesheet($this->baseUrl().'/library/Datatables-Bootstrap3/BS3/assets/css/datatables.css');
 ?>
 <div class="container center">
     <div class="header">Rentas</div>
             <div class="actions">
 	            <a href="<?php echo $this->url(array('module'=>'operator','controller' => 'rented-movies', 'action' => 'new'),null,true);?>" class="button right verde"><span class="icon fa-plus"></span>Nueva renta</a>
-	            <a href="../Index/indexEmployee" class="button left azul"><span class="icon fa-home"></span>Regresar</a>
+	            <a href="<?php echo $this->url(array('module'=>'operator','controller' => 'index', 'action' => 'index'),null,true);?>" class="button left azul"><span class="icon fa-home"></span>Regresar</a>
             </div>
             <table style="width:100%" border="1">
                 <thead>
@@ -24,27 +25,25 @@ $this->headLink()->appendStylesheet($this->baseUrl().'/library/Datatables-Bootst
                 </tr>
                 </thead>
                 <tbody>
-                	<?php foreach ($allRented as $rented):?>
+                	<?php foreach ($this->rentedMovies as $rented):?>
                     <tr>
-                    	<td><?php echo $rented->id;?></td>
-                    	<td><?php echo $rented->getMovie()->title;?></td>
-                    	<td><?php echo $rented->getClient()->name." ".$rented->getClient()->lastName;?></td>
-                    	<td><?php echo $rented->rentedUnits;?></td>
-                    	<td><?php echo $rented->total;?></td>
-                    	<td><?php echo $rented->date;?></td>
-                    	<td><?php echo $rented->devolutionDate;?></td>
+                    	<td><?php echo $rented->getId();?></td>
+                    	<td><?php echo $rented->getMovie()->getTitle();?></td>
+                    	<td><?php echo $rented->getClient()->getName()." ".$rented->getClient()->getLastName();?></td>
+                    	<td><?php echo $rented->getRentedUnits();?></td>
+                    	<td><?php echo $rented->getTotal();?></td>
+                    	<td><?php echo $rented->getDate();?></td>
+                    	<td><?php echo $rented->getDevolutionDate();?></td>
                     	<td>
-                    	<?php if($rented->isRented == ClientHasMovie::$statusArray["RENTED"]):?>
+                    	<?php if($rented->getIsRented() == Application_Model_Rented::$statusArray["RENTED"]):?>
                     	<strong class="rentado">RENTADO</strong>
                     	<?php else:?>
                     	<strong class="devuelto">DEVUELTO</strong>
                     	<?php endif;?>
                     	</td>
                     	<td>
-                    	<?php if($rented->isRented == ClientHasMovie::$statusArray["RENTED"]):?>
-                    	 <a href="../RentedMovie/returnMovie?id=<?php echo $rented->id;?> " class="s-button verde">Devolver</a>
-                    		<!-- <input type="hidden" id="idRented" name="idRented" value="<?php //echo $rented->id;?>"/>  -->
-                    		<!-- <button type="submit" class="verde">Devolver</button>  -->
+                    	<?php if($rented->getIsRented() == Application_Model_Rented::$statusArray["RENTED"]):?>
+                    	 <a href="<?php echo $this->url(array('module'=>'operator','controller' => 'rented-movies', 'action' => 'return-movie', "id"=>$rented->getId()),null,true);?>" class="s-button verde">Devolver</a>
                     	<?php endif;?>
                     	</td>
                     </tr>
