@@ -1,10 +1,5 @@
 <?php 
-$this->headScript()->appendFile($this->baseUrl().'/library/bootstrap-multiselect/js/bootstrap-multiselect.js');
-$this->headScript()->appendFile($this->baseUrl().'/library/bootstrap-multiselect/js/prettify.js');
 $this->headScript()->appendFile($this->baseUrl().'/js/admin/user/edit.js');
-
-$this->headLink()->appendStylesheet($this->baseUrl().'/library/bootstrap-multiselect/css/bootstrap-multiselect.css');
-$this->headLink()->appendStylesheet($this->baseUrl().'/library/bootstrap-multiselect/css/prettify.css');
 
 $employee = $this->user;
 ?>
@@ -12,15 +7,12 @@ $employee = $this->user;
     <div class="header">Editar: <?php echo $employee->getName();?></div>
             <form action="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'update'),null,true);?>" id="form" name="form" method="post" class="form-group">
                 <input type="hidden" id="id" name="id" value="<?php echo $employee->getId();?>">
-                <?php //if(isset($errorEmail)):?>
-                  <!--   <label style="text-align: center; color: red;">Ya existe un usuario con el correo: <?php //echo $_GET["email"];?></label> -->
-                <?php //endif;?>
-                <?php //if(isset($errorEmail)):?>
-                   <!--  <label style="text-align: center; color: red;">Ya existe un usuario con el nombre de usuario: <?php // echo $_GET["username"];?></label>  -->
-                <?php // endif;?>
 
                 <label ><span>Nombre de usuario:</span></label><input type="text" id="username" name="username"  value="<?php echo $employee->getUsername();?>"/>
-
+                <div id="errorName" class="col-md-3" style="display: none;">
+                    <label style="text-align: center; color: red;"> El nombre de usuario ya existe</label>
+                </div>
+                
                 <label ><span>Contrase&ntilde;a: </span></label><input type="password" id="password" name="password" value="<?php //echo $employee->getPassword();?>"/>
                 
                 <label ><span>Nombre: </span></label><input type="text" id="name" name="name" value="<?php echo $employee->getName();?>"/>
@@ -45,6 +37,7 @@ $employee = $this->user;
                     <br>
                 <input type="submit" name="editBtn" id="editBtn" value="Actualizar" class="right verde">
                 <a id="btn_cancelar" value="Cancelar" href="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'index'),null,true);?>" class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
+                <input type="hidden" id="urlEdit" value="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'evaluate-edit'),null,true);?>">
                 <br>
                 <br>
                 <br>

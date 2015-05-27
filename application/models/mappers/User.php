@@ -78,6 +78,18 @@ class Application_Model_Mapper_User implements Application_Model_Mapper_Abstract
 	    $user->setTypeUser($typeUser);
 	    return $user;
 	}
+	
+	public function findOneByUsername($username) {
+		// TODO Auto-generated method stub
+		$row = $this->userDbTable->fetchRow($this->userDbTable->select()->where("username=?",$username))->toArray();
+		 
+		$mapperTypeUser = new Application_Model_Mapper_TypeUser();
+		$typeUser =$mapperTypeUser->findOneBy($row["type_user_id"]);
+		$user = new Application_Model_User();
+		$user->createFromDbTable($row);
+		$user->setTypeUser($typeUser);
+		return $user;
+	}
 
 	/* (non-PHPdoc)
 	 * @see Application_Mapper_abstract::findAll()

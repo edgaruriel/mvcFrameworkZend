@@ -1,8 +1,6 @@
 <?php 
-$this->headScript()->appendFile($this->baseUrl().'/library/DataTables1.9/media/js/jquery.dataTables.js');
-$this->headScript()->appendFile($this->baseUrl().'/library/Datatables-Bootstrap3/BS3/assets/js/datatables.js');
-$this->headLink()->appendStylesheet($this->baseUrl().'/library/Datatables-Bootstrap3/BS3/assets/css/datatables.css');
-    //echo $this->headScript();
+    
+$session = new Zend_Session_Namespace('mvc');
 ?>
 <div class="container center" >
 		<div class="header">Empleados</div>
@@ -25,26 +23,24 @@ $this->headLink()->appendStylesheet($this->baseUrl().'/library/Datatables-Bootst
                 </thead>
                 <tbody>
                     <?php foreach($this->users as $employee):?>
-                        <tr>
-                            <td><?php echo $employee->getId();?></td>
-                            <td><?php echo utf8_encode($employee->getUsername());?></td>
-                            <td><?php echo utf8_encode($employee->getName());?></td>
-                            <td><?php echo utf8_encode($employee->getLastName());?></td>
-                            <td><?php echo utf8_encode($employee->getEmail())?></td>
-                            <td>
-                            <?php 
-                         /*   foreach ($types as $type):
-                            	if($type->getId() == $employee->getTypeUser())
-                            		echo utf8_encode($type->getName());
-                            endforeach; */
-                            echo utf8_encode($employee->getTypeUser()->getName()); 
-                            ?>
-                            </td>
-                            <td>
-                                <a href="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'edit', 'id'=>$employee->getId()),null,true);?> " class="s-button verde"><span class="s-icon fa-edit"></span></a>
-                                <a href="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'delete', 'id'=>$employee->getId()),null,true);?>" class="s-button rojo"><span class="s-icon fa-trash"></span></a>
-                            </td>
-                        </tr>
+                        <?php if($employee->getId()!=$session->user->getId()):?>
+                            <tr>
+                                <td><?php echo $employee->getId();?></td>
+                                <td><?php echo utf8_encode($employee->getUsername());?></td>
+                                <td><?php echo utf8_encode($employee->getName());?></td>
+                                <td><?php echo utf8_encode($employee->getLastName());?></td>
+                                <td><?php echo utf8_encode($employee->getEmail())?></td>
+                                <td>
+                                <?php 
+                                echo utf8_encode($employee->getTypeUser()->getName()); 
+                                ?>
+                                </td>
+                                <td>
+                                    <a href="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'edit', 'id'=>$employee->getId()),null,true);?> " class="s-button verde"><span class="s-icon fa-edit"></span></a>
+                                    <a href="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'delete', 'id'=>$employee->getId()),null,true);?>" class="s-button rojo"><span class="s-icon fa-trash"></span></a>
+                                </td>
+                            </tr>
+                        <?php endif;?>
                     <?php endforeach;?>
                 </tbody>
             </table>

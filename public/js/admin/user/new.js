@@ -1,35 +1,49 @@
-window.onload = function() {
-    document.getElementById("newBtn").onclick = function(){return validation()};
-}
+$(function(){
+	
+	$.validator.addMethod('email',
+	        function(value, element){
+	            return this.optional(element) || /(^[-!#$%&'*+/=?^_`{}|~0-9A-Z]+(\.[-!#$%&'*+/=?^_`{}|~0-9A-Z]+)*|^"([\001-\010\013\014\016-\037!#-\[\]-\177]|\\[\001-\011\013\014\016-\177])*")@((?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)$)|\[(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}\]$/i.test(value);
+	        },'Verify you have a valid email address.'
+	    );
+	
+	$('#form').validate({
+        rules: {
+	        'username': 'required',
+	        'name': 'required',
+	        'password': 'required',
+	        'lastName': 'required',
+	        'email': {'required':true, 'email':true},
+	        'typeUserId': 'required'
+        },
+	    messages: {
+	    	'username': '<label style="text-align: center; color: red;"> Campo obligatorio</label>',
+	        'name': '<label style="text-align: center; color: red;"> Campo obligatorio</label>',
+	        'password': '<label style="text-align: center; color: red;"> Campo obligatorio</label>',
+	        'lastName': '<label style="text-align: center; color: red;"> Campo obligatorio</label>',
+	        'email': {'required':'<label style="text-align: center; color: red;"> Campo obligatorio</label>', 'email':'<label style="text-align: center; color: red;"> Ingrese un email v&aacute;lido</label>'},
+	        'typeUserId': '<label style="text-align: center; color: red;"> Campo obligatorio</label>'
+	    },
+	    debug: true,
+	    submitHandler: function(form){
+	    	validateUsername();
+	    } 
+	 });
+});
 
-function validation(){
-	var username = document.getElementById("username").value;
-	var password = document.getElementById("password").value;
-    var name = document.getElementById("name").value;
-    var last_name = document.getElementById("lastName").value;
-    var email = document.getElementById("email").value;
-    var type = document.getElementById("typeUserId").value;
-
-    if(username=="" || password=="" || name=="" || last_name=="" || email=="" || type==""){
-        alert("No pueden haber campos vacios");
-        return false;
-    }
-    
-    if(!isNaN(name)){
-        alert("No se aceptan numeros en el nombre");
-        return false;
-    }
-
-    if(!isNaN(last_name)){
-        alert("No se aceptan numeros en el apellido");
-        return false;
-    }
-
-    var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if ( !expr.test(email) ){
-        alert("Ingrese un correo valido");
-        return false;
-    }
-
-    return true;
+function validateUsername(){
+	var username = $('#username').val();
+	var url = $('#urlNew').val();
+	$.ajax({
+		type:"POST",
+		data: {username:username},
+		url: url,
+		success: function(result){
+			if(result==1){
+				$('#errorName').show();
+			}else{
+				$('#errorName').hide();
+				$('input[type=submit]').prop('disabled',true);
+				form.submit();
+			}
+	}});
 }

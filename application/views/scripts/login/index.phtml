@@ -8,7 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php
 $this->headScript()->appendFile($this->baseUrl() . '/library/jquery/jquery-1.8.2.min.js');
-$this->headScript()->appendFile($this->baseUrl() . '/library/bootstrap.3.1.1/js/bootstrap.js');
 $this->headScript()->appendFile($this->baseUrl() . '/library/jqueryValidation/jquery-validation.js');
 $this->headScript()->appendFile($this->baseUrl() . '/js/login/index.js');
 
@@ -56,7 +55,7 @@ echo $this->headScript();
 		</form>
 		<?php if(isset($this->error)):?>
 				    <div class="alert alert-danger">
-				    <?php echo utf8_encode($this->error);?>
+				    <label style="text-align: center; color: red;"><?php echo utf8_encode($this->error);?></label>
 				    </div>
 				<?php endif;?>
 	</div>

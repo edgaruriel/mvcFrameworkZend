@@ -32,7 +32,7 @@ class Application_Service_Authentication
     	    if($user->getTypeUser()->getId() == Application_Model_TypeUser::$typeUserArray['EMPLOYEE']){
     	    	
     	    	$session = new Zend_Session_Namespace('mvc');
-    	    	$session->user = 2;
+    	    	$session->user = $user;
     	    	$identity = (object) array('name' => $userRow->name,
     	    			'type_user_id' => $userRow->type_user_id,
     	    			'last_name' => $userRow->last_name);
@@ -41,7 +41,7 @@ class Application_Service_Authentication
     	    }
     	    else if($user->getTypeUser()->getId() == Application_Model_TypeUser::$typeUserArray['ADMIN']){
     	    	$session = new Zend_Session_Namespace('mvc');
-    	    	$session->user = 1;
+    	    	$session->user = $user;
     	    	$identity = (object) array('name' => $userRow->name,
     	    			'type_user_id' => $userRow->type_user_id,
     	    			'last_name' => $userRow->last_name);

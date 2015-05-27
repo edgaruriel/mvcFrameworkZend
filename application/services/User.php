@@ -16,6 +16,10 @@ class Application_Service_User
         return $this->userMapper->findOneBy($id);
     }
     
+    public function findByUsername($username){
+    	return $this->userMapper->findOneByUsername($username);
+    }
+    
     public function addUser($user){
         return $this->userMapper->insert($user);
     }

@@ -1,25 +1,32 @@
-window.onload = function() {
-    document.getElementById("newBtn").onclick = function(){return validation()};
-    document.getElementById("totalUnits").onkeypress= function(){return justNumbers(event)};
-    document.getElementById("price").onkeypress= function(){return justNumbers(event)};
-}
-
-function validation(){
-	var title = document.getElementById("title").value;
-	var format = document.getElementById("format").value;
-	var totalUnits = document.getElementById("totalUnits").value;
-	var year = document.getElementById("year").value;
-	var price = document.getElementById("price").value;
-	var code = document.getElementById("code").value;
-	var gender = document.getElementById("genderId").value;
+$(function(){
+	$('#form').validate({
+        rules: {
+	        'title': 'required',
+	        'format': 'required',
+	        'totalUnits': {'required':true, 'number':true},
+	        'year': 'required',
+	        'code': 'required',
+	        'price': {'required':true, 'number':true},
+	        'genderId': 'required'
+        },
+	    messages: {
+	    	'title': '<label style="text-align: center; color: red;"> Campo obligatorio</label>',
+	        'format': '<label style="text-align: center; color: red;"> Campo obligatorio</label>',
+	        'totalUnits': {'required':'<label style="text-align: center; color: red;"> Campo obligatorio</label>', 'number':'<label style="text-align: center; color: red;"> Solo se admiten numeros</label>'},
+	        'year': '<label style="text-align: center; color: red;"> Campo obligatorio</label>',
+	        'code': '<label style="text-align: center; color: red;"> Campo obligatorio</label>',
+	        'price': {'required':'<label style="text-align: center; color: red;"> Campo obligatorio</label>', 'number':'<label style="text-align: center; color: red;"> Solo se admiten numeros</label>'},
+	        'genderId': '<label style="text-align: center; color: red;"> Campo obligatorio</label>'
+	    },
+	    debug: true,
+	    submitHandler: function(form){
+	    	form.submit();
+	    } 
+	 });
 	
-	if(title == "" || format=="" || totalUnits=="" || year=="" || price=="" || code=="" || gender==""){
-		alert("Todos los campos son obligatorios");
-		return false;
-	}else{
-		return true;
-	}
-}
+	document.getElementById("totalUnits").onkeypress= function(){return justNumbers(event)};
+    document.getElementById("price").onkeypress= function(){return justNumbers(event)};
+});
 
 function justNumbers(e)
 {

@@ -32,6 +32,7 @@ class Admin_UserController extends Zend_Controller_Action
 	
 			$user = new Application_Model_User();
 			$user->createFromArray($data);
+			$user->setPassword(sha1($data["password"]));
 			
 			$typeUserService = new Application_Service_TypeUser();
 			$typeUser = $typeUserService->findById($data["typeUserId"]);
@@ -63,15 +64,23 @@ class Admin_UserController extends Zend_Controller_Action
 		if($this->getRequest()->isPost()){
 			$data = $this->getRequest()->getParams();
 			
+			$userService = new Application_Service_User();
+			$userEdit = $userService->findById($data["id"]);
+			
 			$user = new Application_Model_User();
 			$user->createFromArray($data);
+			
+			if($data["password"]!=null || $data["password"]!=""){
+			    $user->setPassword(sha1($data["password"]));
+			}else{
+			    $user->setPassword($userEdit->getPassword());
+			}
 			
 			$typeUserService = new Application_Service_TypeUser();
 			$typeUser = $typeUserService->findById($data["typeUserId"]);
 				
 			$user->setTypeUser($typeUser);
 	
-			$userService = new Application_Service_User();
 			$userService->update($user);
 
             $this->_helper->redirector('index');
@@ -89,6 +98,43 @@ class Admin_UserController extends Zend_Controller_Action
 		$clientService->delete($user);
 	
 		$this->_helper->redirector('index');
+	}
+	
+	public function evaluateNewAction(){
+		if($this->getRequest()->isPost()){
+			$this->_helper->layout()->disableLayout();
+			$this->_helper->viewRenderer->setNoRender(true);
+			$data = $this->getRequest()->getParams();
+			$username = $data["username"];
+			$userService = new Application_Service_User();
+			$result = $userService->findByUsername($username);
+			if($result!=null){
+				echo '1';
+			}else{
+				echo '0';
+			}
+		}
+	}
+	
+	public function evaluateEditAction(){
+		if($this->getRequest()->isPost()){
+			$this->_helper->layout()->disableLayout();
+			$this->_helper->viewRenderer->setNoRender(true);
+			$data = $this->getRequest()->getParams();
+			$id = $data["id"];
+			$username = $data["username"];
+			$userService = new Application_Service_User();
+			$result = $userService->findByUsername($username);
+			if($result!=null){
+				if($result->getId()==$id){
+					echo '0';
+				}else{
+					echo '1';
+				}
+			}else{
+				echo '0';
+			}
+		}
 	}
     
 }

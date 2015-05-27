@@ -1,10 +1,4 @@
 <?php
-$this->headScript()->appendFile($this->baseUrl().'/library/bootstrap-multiselect/js/bootstrap-multiselect.js');
-$this->headScript()->appendFile($this->baseUrl().'/library/bootstrap-multiselect/js/prettify.js');
-
-$this->headScript()->appendFile($this->baseUrl().'/library/jqueryValidation/jquery-validation.js');
-
-$this->headLink()->appendStylesheet($this->baseUrl().'/library/bootstrap-multiselect/css/bootstrap-multiselect.css');
 
 $this->headScript()->appendFile($this->baseUrl().'/js/admin/user/new.js');
 //echo $this->headScript();
@@ -15,6 +9,9 @@ $this->headScript()->appendFile($this->baseUrl().'/js/admin/user/new.js');
             <form action="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'new'),null,true);?>" id="form" name="form" method="post" class="form-group">
                  
                     <label ><span>Nombre de usuario:</span></label><input type="text" id="username" name="username"/>
+                    <div id="errorName" class="col-md-3" style="display: none;">
+                        <label style="text-align: center; color: red;"> El nombre de usuario ya existe</label>
+                    </div>
 
                     <label ><span>Contrase&ntilde;a: </span></label><input type="password" id="password" name="password"/>
                 
@@ -35,6 +32,7 @@ $this->headScript()->appendFile($this->baseUrl().'/js/admin/user/new.js');
                     </label>
                 <input type="submit" name="newBtn" id="newBtn" value="Agregar" class="right verde">
                 <a id="btn_cancelar" value="Cancelar" href="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'index'),null,true);?>" class="button left azul"><span class="icon fa-times"></span>Cancelar</a>
+                <input type="hidden" id="urlNew" value="<?php echo $this->url(array('module'=>'admin','controller' => 'user', 'action' => 'evaluate-new'),null,true);?>">
                 <br>
                 <br>
                 <br>
