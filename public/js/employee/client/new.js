@@ -1,33 +1,21 @@
-window.onload = function() {
-    document.getElementById("newBtn").onclick = function(){return validation()};
-}
-
-function validation(){
-    var name = document.getElementById("name").value;
-    var last_name = document.getElementById("lastName").value;
-    var email = document.getElementById("email").value;
-    var ife = document.getElementById("ife").value;
-
-    if(name=="" || last_name=="" || email=="" || ife==""){
-        alert("No pueden haber campos vacios");
-        return false;
-    }
-
-    if(!isNaN(name)){
-        alert("No se aceptan numeros en el nombre");
-        return false;
-    }
-
-    if(!isNaN(last_name)){
-        alert("No se aceptan numeros en el apellido");
-        return false;
-    }
-
-    var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if ( !expr.test(email) ){
-        alert("Ingrese un correo valido");
-        return false;
-    }
-
-    return true;
-}
+$(function(){
+	$('#form').validate({
+        rules: {
+	        'name': 'required',
+	        'lastName': 'required',
+	        'email': {'required':true, 'email':true},
+	        'ife': 'required'
+        },
+	    messages: {
+	    	'name': '<label style="text-align: center; color: red;"> Campo obligatorio</label>',
+	        'lastName': '<label style="text-align: center; color: red;"> Campo obligatorio</label>',
+	        'email': {'required':'<label style="text-align: center; color: red;"> Campo obligatorio</label>', 'email':'<label style="text-align: center; color: red;"> Ingrese un email v&aacute;lido</label>'},
+	        'ife': '<label style="text-align: center; color: red;"> Campo obligatorio</label>'
+	    },
+	    debug: true,
+	    submitHandler: function(form){
+	    	form.submit();
+	    } 
+	 });
+	
+});

@@ -3,7 +3,7 @@ $this->headScript()->appendFile($this->baseUrl().'/js/employee/rentedMovie/new.j
 ?>
 
 <div class="container center">
- <form action="<?php echo $this->url(array('module'=>'operator','controller' => 'rented-movies', 'action' => 'new'),null,true);?>" id="form" name="form" method="post" class="">
+ <form id="form" action="<?php echo $this->url(array('module'=>'operator','controller' => 'rented-movies', 'action' => 'new'),null,true);?>" id="form" name="form" method="post" class="">
 	<div class="header">Nueva Renta</div>
 	<div class="form-group">
 		<label><span>Cliente:</span></label>
@@ -30,10 +30,30 @@ $this->headScript()->appendFile($this->baseUrl().'/js/employee/rentedMovie/new.j
 		</select>
 		<input type="hidden" id="allMovie" name="allMovie" value='<?php echo json_encode($arrayAux);?>'/>
 		<label><span>N&uacute;mero de peliculas a rentar:</span></label>
-		<input type="number" id="numberMovie" name="number" min="1" />
-
+		<input type="number" id="numberMovie" name="numberMovie"/>
+        <br>
 		<button type="button" onclick="addMovie();" class="verde"><span class="icon fa-plus"></span>Agregar pelicula</button>
+	    <strong style="margin-left: 55%;">Precio ($) <span id="price" style="color:blue;">0.00</span></strong>
+	    <div class="pull-left">
+	       
+	    </div>
+	    <br>
 	</div>
+	<div id="errorMovies" style="display:none;">
+                <div class="alert alert-danger " style="text-align: center; color: red;">
+                	<strong><i class="fa fa-exclamation-triangle"></i>&nbsp;Agregue m&iacute;nimo una pelicula.</strong> 
+                </div>
+    </div>
+    <div id="errorAddMovie" style="display:none;">
+                <div class="alert alert-danger" style="text-align: center; color: red;">
+                	<strong><i class="fa fa-exclamation-triangle"></i>&nbsp;Seleccione una pelicula y un numero de peliculas v&aacute;lido</strong> 
+                </div>
+    </div>
+    <div id="errorNumberMovie" style="display:none;">
+                <div class="alert alert-danger" style="text-align: center; color: red;">
+                	<strong><i class="fa fa-exclamation-triangle"></i>&nbsp;El n&uacute;mero de peliculas a rentar superan las disponibles</strong> 
+                </div>
+    </div>
 		<hr>
 		<h3>Lista de peliculas agregadas</h3>
 		<table id="selectedMoviesTable" name="selectedMoviesTable" class="tableMovie">

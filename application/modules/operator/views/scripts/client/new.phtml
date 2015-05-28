@@ -4,7 +4,7 @@ $this->headScript()->appendFile($this->baseUrl().'/js/employee/client/new.js');
 
 <div class="container center">
     <div class="header">Nuevo Cliente</div>
-            <form action="<?php echo $this->url(array('module'=>'operator','controller' => 'client', 'action' => 'new',null,true));?>" id="form" name="form" method="post" class="form-group">
+            <form id="form" action="<?php echo $this->url(array('module'=>'operator','controller' => 'client', 'action' => 'new',null,true));?>" id="form" name="form" method="post" class="form-group">
 
                     <label ><span>Nombre: </span></label><input type="text" id="name" name="name"/>
 

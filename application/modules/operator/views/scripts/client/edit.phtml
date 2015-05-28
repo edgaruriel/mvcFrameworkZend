@@ -5,7 +5,7 @@ $client = $this->client;
 
 <div class="container center">
 	<div class="header">Editar: <?php echo $client->name;?></div>
-            <form action="<?php echo $this->url(array('module'=>'operator','controller' => 'client', 'action' => 'update',null,true));?>" id="form" name="form" method="post" class="form-group">
+            <form id="form" action="<?php echo $this->url(array('module'=>'operator','controller' => 'client', 'action' => 'update',null,true));?>" id="form" name="form" method="post" class="form-group">
                 <input type="hidden" id="id" name="id" value="<?php echo $client->getId();?>">
                     
                     <label ><span>Nombre: </span></label><input type="text" id="name" name="name" value="<?php echo $client->getName();?>"/>

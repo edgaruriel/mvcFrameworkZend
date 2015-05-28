@@ -1,13 +1,41 @@
 var MOVIES;
 var ADD_MOVIES = new Array();
-var ajax = {};
-window.onload = function() {
-	document.getElementById("numberMovie").onkeypress= function(){return justNumbers(event);};
-	 document.getElementById("btnNew").onclick = function(){return rentedMovies();};
+
+$(function(){
+	$('#form').validate({
+        rules: {
+	        'clientId': 'required',
+	        'devolutionDate': 'required',
+	        'numberMovie': {'number':true},
+	        
+        },
+	    messages: {
+	    	'clientId': '<label style="text-align: center; color: red;"> Campo obligatorio</label>',
+	        'devolutionDate': '<label style="text-align: center; color: red;"> Campo obligatorio</label>',
+	        'numberMovie': {'number':'<label style="text-align: center; color: red;"> Solo n&uacute;meros</label>'},
+	    },
+	    debug: true,
+	    submitHandler: function(form){
+	    	hideMessageError();
+	    	if(ADD_MOVIES.length > 0){
+				//sendAjaxToAddRented();
+				var movies = document.getElementById("movies");
+				var json = JSON.stringify(ADD_MOVIES);
+				movies.value = json;
+				form.submit();
+			}else{
+				showMessageError('errorMovies');
+			}
+	    	
+	    } 
+	 });
 	MOVIES = JSON.parse(document.getElementById("allMovie").value);
-};
+	document.getElementById("numberMovie").onkeypress= function(){return justNumbers(event);};
+});
+
 
 function addMovie(){
+	hideMessageError();
 var selectedMovie =	document.getElementById("movie").value;
 var numberMovie =	document.getElementById("numberMovie").value;
 	if(selectedMovie != '' && numberMovie != '' && numberMovie != ' ' && numberMovie != '.'){
@@ -18,6 +46,7 @@ var numberMovie =	document.getElementById("numberMovie").value;
 			newMovie.title = movieAux.title;
 			newMovie.year = movieAux.year;
 			newMovie.numberMovie = numberMovie;
+			newMovie.price = movieAux.price;
 			var index = ADD_MOVIES.length;
 			if(index != 0){
 				//index--;
@@ -26,12 +55,24 @@ var numberMovie =	document.getElementById("numberMovie").value;
 			//console.log("Index a buscar "+index+" cantidad: "+ADD_MOVIES.length);
 			addRowToTableMovies(index);
 			refreshAddMovie();
+			updatePrice();
 		}else{
 			//console.log("ERROR");
 		}
 	}else{
-		alert("Seleccione una pelicula y un numero de peliculas valido");
+		showMessageError('errorAddMovie');
 	}
+}
+
+function updatePrice(){
+	var total = 0;
+	var i;
+	for(i = 0; i< ADD_MOVIES.length; i++){
+		var movie = ADD_MOVIES[i];
+		var price = movie.price;
+		total += (price * movie.numberMovie);
+	}
+	$('#price').text(total.toFixed(2));
 }
 
 function getMovieById(idMovie){
@@ -48,6 +89,7 @@ function getMovieById(idMovie){
 }
 
 function deleteMovie(index){
+	hideMessageError();
 	var i;
 	for(i = 1; i<=ADD_MOVIES.length; i++){
 		document.getElementById("selectedMoviesTable").deleteRow(1);
@@ -58,6 +100,7 @@ function deleteMovie(index){
 	for(i = 0; i<ADD_MOVIES.length; i++){
 		addRowToTableMovies(i);
 	}
+	updatePrice();
 	//console.log("Borro indice: "+index+" queda: "+ADD_MOVIES.length);
 }
 
@@ -111,7 +154,7 @@ function validateMovie(idSelected,amountMovie){
 			if(amountMovie <= existUnits && existUnits != 0 && amountMovie != 0){
 				flag = true;
 			}else{
-				alert("El número de peliculas disponibles para este titulo es: "+existUnits);
+				showMessageError('errorNumberMovie');
 				flag = false;
 			}
 			break;
@@ -123,30 +166,15 @@ function validateMovie(idSelected,amountMovie){
 	return flag;
 }
 
-function rentedMovies(){
-	var flag = true;
-	var idClient = document.getElementById("clientId").value;
-	if(idClient != ""){
-		var date = document.getElementById("devolutionDate").value;
-		if(date != ""){
-			if(ADD_MOVIES.length > 0){
-				//sendAjaxToAddRented();
-				var movies = document.getElementById("movies");
-				var json = JSON.stringify(ADD_MOVIES);
-				movies.value = json;
-			}else{
-				flag = false;
-				alert("Agregue al menos una pelicula");
-			}
-		}else{
-			flag = false;
-			alert("Seleccione una fecha para la devolucion");
-		}
-	}else{
-		flag = false;
-		alert("Seleccione un cliente");
-	}
-	return flag;
+function showMessageError(divId){
+	var id = '#'+divId;
+	$(id).show();
+}
+
+function hideMessageError(){
+	$('#errorMovies').hide();
+	$('#errorAddMovie').hide();
+	$('#errorNumberMovie').hide();
 }
 
 var Movie = function(){
@@ -154,6 +182,7 @@ var Movie = function(){
 	this.title;
 	this.year;
 	this.numberMovie;
+	this.price;
 };
 
 
